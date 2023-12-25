@@ -1,6 +1,6 @@
 <?php
 // Include your database connection file
-require_once('E:\AppServ\www\Airlines\connection.php');
+require_once('C:\AppServ\www\Airlines\connection.php');
 // Retrieve the user ID from the URL
 $userIdd = isset($_GET['user_id']) ? $_GET['user_id'] : null;
 // Check if the form is submitted

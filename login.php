@@ -3,7 +3,7 @@
 session_start();
 
 // Include your database connection file
-require_once('E:\AppServ\www\Airlines\connection.php');
+require_once('C:\AppServ\www\Airlines\connection.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve user input from the form
@@ -64,46 +64,46 @@ $con->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-    /* Add your styles here */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .login-form {
-        max-width: 400px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .login-form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    .form-group input {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-    }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
 
-    .submit-btn {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        .submit-btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 

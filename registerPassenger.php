@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passenger Registration</title>
     <style>
-    /* Add your styles here */
-    /* Similar styles as in the registration page */
+        /* Add your styles here */
+        /* Similar styles as in the registration page */
     </style>
 </head>
 
@@ -41,32 +41,32 @@
     </div>
 
     <?php
-require_once('E:\AppServ\www\Airlines\connection.php');
+    require_once('C:\AppServ\www\Airlines\connection.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data
-    $passengerId = isset($_POST['passenger_id']) ? $_POST['passenger_id'] : '';
-    // Handle image uploads for photo and passport_img
-    $photo = ''; // Store the path or data for photo
-    $passportImg = ''; // Store the path or data for passport image
-    $accountBalance = isset($_POST['account_balance']) ? $_POST['account_balance'] : '';
-    $userId = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Retrieve form data
+        $passengerId = isset($_POST['passenger_id']) ? $_POST['passenger_id'] : '';
+        // Handle image uploads for photo and passport_img
+        $photo = ''; // Store the path or data for photo
+        $passportImg = ''; // Store the path or data for passport image
+        $accountBalance = isset($_POST['account_balance']) ? $_POST['account_balance'] : '';
+        $userId = isset($_POST['user_id']) ? $_POST['user_id'] : '';
 
-    // Code to handle file uploads for photo and passport_img (not shown here)
-
-    // Insert data into Passenger table
-    $sql = "INSERT INTO passenger (passenger_id, user_id, photo, passport_img, account_balance) VALUES ('$passengerId', '$userId', '$photo', '$passportImg', '$accountBalance')";
-    if ($con->query($sql) === FALSE) {
-        echo "Error: " . $sql . "<br>" . $con->error;
-    } else {
-        // Passenger registered successfully, redirect to login page
-        header("Location: login.php");
-        exit(); // Ensure that subsequent code is not executed after redirection
+        // Code to handle file uploads for photo and passport_img (not shown here)
+    
+        // Insert data into Passenger table
+        $sql = "INSERT INTO passenger (passenger_id, user_id, photo, passport_img, account_balance) VALUES ('$passengerId', '$userId', '$photo', '$passportImg', '$accountBalance')";
+        if ($con->query($sql) === FALSE) {
+            echo "Error: " . $sql . "<br>" . $con->error;
+        } else {
+            // Passenger registered successfully, redirect to login page
+            header("Location: login.php");
+            exit(); // Ensure that subsequent code is not executed after redirection
+        }
     }
-}
 
-$con->close();
-?>
+    $con->close();
+    ?>
 
 </body>
 

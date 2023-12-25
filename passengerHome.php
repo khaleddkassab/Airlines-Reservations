@@ -6,90 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passenger Home</title>
     <style>
-    /* Add your styles here */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    .passenger-info {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+        .passenger-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .passenger-info img {
-        max-width: 200px;
-        height: auto;
-    }
+        .passenger-info img {
+            max-width: 200px;
+            height: auto;
+        }
 
-    .flight-list {
-        margin-bottom: 20px;
-    }
+        .flight-list {
+            margin-bottom: 20px;
+        }
 
-    .flight-list h3 {
-        margin-bottom: 10px;
-    }
+        .flight-list h3 {
+            margin-bottom: 10px;
+        }
 
-    .flight-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        .flight-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .flight-table th,
-    .flight-table td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-    }
+        .flight-table th,
+        .flight-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
 
-    .flight-table th {
-        background-color: #f4f4f4;
-    }
+        .flight-table th {
+            background-color: #f4f4f4;
+        }
 
-    .flight-details {
-        display: none;
-        margin-top: 20px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
+        .flight-details {
+            display: none;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
 
-    .flight-details h3 {
-        margin-top: 0;
-    }
+        .flight-details h3 {
+            margin-top: 0;
+        }
 
-    .show-details {
-        cursor: pointer;
-        color: blue;
-    }
+        .show-details {
+            cursor: pointer;
+            color: blue;
+        }
 
-    .logout-btn,
-    .profile-btn {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 8px 16px;
-        text-decoration: none;
-        background-color: #3498db;
-        color: #fff;
-        border-radius: 5px;
-    }
+        .logout-btn,
+        .profile-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+        }
 
-    .logout-btn:hover,
-    .profile-btn:hover {
-        background-color: #2980b9;
-    }
+        .logout-btn:hover,
+        .profile-btn:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 
@@ -101,7 +101,7 @@
             session_start();
 
             // Include your database connection file
-            require_once('E:\AppServ\www\Airlines\connection.php');
+            require_once('C:\AppServ\www\Airlines\connection.php');
 
             // Retrieve the user ID from the session
             $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
@@ -205,8 +205,8 @@
     </div>
 
     <script>
-    // JavaScript to handle displaying flight details
-    // ... (Your JavaScript code remains unchanged)
+        // JavaScript to handle displaying flight details
+        // ... (Your JavaScript code remains unchanged)
     </script>
 </body>
 

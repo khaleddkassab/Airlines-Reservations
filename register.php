@@ -6,47 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
     <style>
-        /* Add your styles here */
+    /* Add your styles here */
 
-        .registration-form {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .registration-form {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
 
-        .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            height: 80px;
-        }
+    .form-group textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        height: 80px;
+    }
 
-        .submit-btn {
-            background-color: #4caf50;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 10px;
-        }
+    .submit-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
     </style>
 </head>
 
@@ -93,7 +93,7 @@
         </form>
     </div>
     <?php
-    require_once('E:\AppServ\www\Airlines\connection.php');
+    require_once('C:\AppServ\www\Airlines\connection.php');
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = isset($_POST['username']) ? $_POST['username'] : '';

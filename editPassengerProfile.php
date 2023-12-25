@@ -8,23 +8,23 @@
     <!-- Add your styles or link external stylesheets here -->
     <!-- Include your stylesheets, if any -->
     <style>
-    /* Add your styles here */
-    /* ... (style your elements as needed) ... */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+        /* Add your styles here */
+        /* ... (style your elements as needed) ... */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
@@ -32,7 +32,7 @@
     <div class="container">
         <?php
         // Include your database connection file
-        require_once('E:\AppServ\www\Airlines\connection.php');
+        require_once('C:\AppServ\www\Airlines\connection.php');
 
         // Retrieve the user ID from the URL
         $userId = isset($_GET['user_id']) ? $_GET['user_id'] : null;
@@ -42,7 +42,7 @@
             // Get form data
             $accountBalance = $_POST['accountBalance'];
             // You can handle file uploads for photo and passport_image here
-          
+        
             // Update passenger profile in the database
             $updateQuery = "UPDATE passenger SET account_balance = '$accountBalance', photo = '$photo', passport_img = '$passportImage' WHERE user_id = $userId"; // Change 'id' to your actual primary key column name
             $updateResult = $con->query($updateQuery);

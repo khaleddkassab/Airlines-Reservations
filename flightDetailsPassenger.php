@@ -64,7 +64,7 @@
             }
 
             // Include your database connection file
-            require_once('E:\AppServ\www\Airlines\connection.php');
+            require_once('C:\AppServ\www\Airlines\connection.php');
 
             // Retrieve user ID from the session
             $userId = $_SESSION['user_id'];
@@ -105,40 +105,11 @@
                 echo "</table>";
 
                 // Display the Book Flight button
-                echo "<form method='post' action=''>";
+                echo "<form method='post' action='bookingSteps.php'>";
                 echo "<input type='hidden' name='flight_id' value='$flightId'>";
                 echo "<input type='hidden' name='user_id' value='$userId'>";
                 echo "<input type='submit' name='book_flight' value='Book Flight'>";
                 echo "</form>";
-
-                // Check if the Book Flight button is clicked
-                if (isset($_POST['book_flight'])) {
-                    if ($userBalance >= $flightFees) {
-                        $newBalance = $userBalance - $flightFees;
-
-                        // Update passenger's account balance
-                        $deductFeesSql = "UPDATE passenger SET account_balance = $newBalance WHERE user_id = $userId";
-                        if ($con->query($deductFeesSql) === TRUE) {
-
-                            // Increase the number of registered passengers in the flights table
-                            $registeredPassengers = $flightRow['registered_passengers'] + 1;
-                            $updateFlightSql = "UPDATE flight SET registered_passengers = $registeredPassengers WHERE flight_id = $flightId";
-                            $con->query($updateFlightSql);
-
-                            // Create a new record in the users_flights table
-                            $insertUserFlightSql = "INSERT INTO user_flights (user_id, flight_id, user_type) VALUES ($userId, $flightId, 'passenger')";
-                            if ($con->query($insertUserFlightSql) === TRUE) {
-                                echo "<p>Flight booked successfully. Amount deducted from account balance. Passenger registered for the flight.</p>";
-                            } else {
-                                echo "<p>Error booking flight: " . $con->error . "</p>";
-                            }
-                        } else {
-                            echo "<p>Error booking flight: " . $con->error . "</p>";
-                        }
-                    } else {
-                        echo "<p>Insufficient balance to book this flight.</p>";
-                    }
-                }
             } else {
                 echo "<p>No flight details available for the provided ID or user not found.</p>";
             }

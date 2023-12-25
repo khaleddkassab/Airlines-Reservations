@@ -6,85 +6,85 @@
     <title>Passenger Profile</title>
     <!-- Styles -->
     <style>
-        /* Add your styles here */
-        /* ... (style your elements as needed) ... */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    /* Add your styles here */
+    /* ... (style your elements as needed) ... */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-        .passenger-profile {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .passenger-profile {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .passenger-profile img {
-            max-width: 200px;
-            height: auto;
-        }
+    .passenger-profile img {
+        max-width: 200px;
+        height: auto;
+    }
 
-        .passenger-info {
-            margin-top: 20px;
-        }
+    .passenger-info {
+        margin-top: 20px;
+    }
 
-        .passenger-info ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
+    .passenger-info ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
 
-        .passenger-info li {
-            margin-bottom: 5px;
-        }
+    .passenger-info li {
+        margin-bottom: 5px;
+    }
 
-        .edit-button {
-            text-align: center;
-            margin-top: 20px;
-        }
+    .edit-button {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .edit-button a,
-        .logout-btn,
-        .home-btn {
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 5px;
-            color: #fff;
-        }
+    .edit-button a,
+    .logout-btn,
+    .home-btn {
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        color: #fff;
+    }
 
-        .edit-button a {
-            background-color: #3498db;
-        }
+    .edit-button a {
+        background-color: #3498db;
+    }
 
-        .edit-button a:hover {
-            background-color: #2980b9;
-        }
+    .edit-button a:hover {
+        background-color: #2980b9;
+    }
 
-        .logout-btn {
-            background-color: #e74c3c;
-        }
+    .logout-btn {
+        background-color: #e74c3c;
+    }
 
-        .logout-btn:hover {
-            background-color: #c0392b;
-        }
+    .logout-btn:hover {
+        background-color: #c0392b;
+    }
 
-        .home-btn {
-            background-color: #27ae60;
-        }
+    .home-btn {
+        background-color: #27ae60;
+    }
 
-        .home-btn:hover {
-            background-color: #219d54;
-        }
+    .home-btn:hover {
+        background-color: #219d54;
+    }
     </style>
 </head>
 
@@ -102,7 +102,7 @@
         }
 
         // Include your database connection file
-        require_once('E:\AppServ\www\Airlines\connection.php');
+        require_once('C:\AppServ\www\Airlines\connection.php');
 
         // Retrieve the user ID from the session
         $userId = $_SESSION['user_id'];

@@ -6,66 +6,66 @@
     <title>Employee Profile</title>
     <!-- Styles -->
     <style>
-        /* Add your styles here */
-        /* ... (style your elements as needed) ... */
+    /* Add your styles here */
+    /* ... (style your elements as needed) ... */
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-        .company-profile {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .company-profile {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .company-profile img {
-            max-width: 200px;
-            height: auto;
-        }
+    .company-profile img {
+        max-width: 200px;
+        height: auto;
+    }
 
-        .employees-list {
-            margin-top: 20px;
-        }
+    .employees-list {
+        margin-top: 20px;
+    }
 
-        .employees-list ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
+    .employees-list ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
 
-        .employees-list li {
-            margin-bottom: 5px;
-        }
+    .employees-list li {
+        margin-bottom: 5px;
+    }
 
-        .edit-button {
-            text-align: center;
-            margin-top: 20px;
-        }
+    .edit-button {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .edit-button a {
-            padding: 8px 16px;
-            text-decoration: none;
-            background-color: #3498db;
-            color: #fff;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
+    .edit-button a {
+        padding: 8px 16px;
+        text-decoration: none;
+        background-color: #3498db;
+        color: #fff;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
 
-        .edit-button a:hover {
-            background-color: #2980b9;
-        }
+    .edit-button a:hover {
+        background-color: #2980b9;
+    }
     </style>
 </head>
 
@@ -79,7 +79,7 @@
             session_start();
 
             // Include your database connection file
-            require_once('E:\AppServ\www\Airlines\connection.php');
+            require_once('C:\AppServ\www\Airlines\connection.php');
 
             // Check if the user is authorized
             if (isset($_SESSION['user_id'])) {

@@ -3,7 +3,7 @@
 session_start();
 
 // Include your database connection file
-require_once('E:\AppServ\www\Airlines\connection.php');
+require_once('C:\AppServ\www\Airlines\connection.php');
 
 // Function to go back to the previous page
 function goBack()
@@ -53,10 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Get the user_id from the session
         $userId = $_SESSION['user_id'];
+        $user_type = 'Employee';  // Assuming user_type is set to 'Employee'
 
         // Insert record into user_flights table
-        $insertStatement = $con->prepare("INSERT INTO user_flights (user_id, flight_id) VALUES (?, ?)");
-        $insertStatement->bind_param("ii", $userId, $flightId);
+        $insertStatement = $con->prepare("INSERT INTO user_flights (user_id, flight_id, user_type) VALUES (?, ?, ?)");
+        $insertStatement->bind_param("iis", $userId, $flightId, $user_type);
+
         $insertStatement->execute();
         $insertStatement->close();
 
@@ -79,67 +81,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Flight</title>
     <style>
-    /* Add your styles here */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        position: relative;
-    }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
 
-    .close-btn,
-    .logout-btn {
-        background-color: #f44336;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        position: absolute;
-        top: 10px;
-    }
+        .close-btn,
+        .logout-btn {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+        }
 
-    .close-btn {
-        right: 10px;
-    }
+        .close-btn {
+            right: 10px;
+        }
 
-    .logout-btn {
-        left: 10px;
-    }
+        .logout-btn {
+            left: 10px;
+        }
 
-    .form-group {
-        margin-bottom: 15px;
-    }
+        .form-group {
+            margin-bottom: 15px;
+        }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    .form-group input {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-    }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
 
-    .submit-btn {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        .submit-btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -173,15 +175,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-    // JavaScript function to go back to the previous page
-    function goBack() {
-        window.history.back();
-    }
+        // JavaScript function to go back to the previous page
+        function goBack() {
+            window.history.back();
+        }
 
-    // JavaScript function to log out and clear the session
-    function logout() {
-        window.location.href = 'logout.php';
-    }
+        // JavaScript function to log out and clear the session
+        function logout() {
+            window.location.href = 'logout.php';
+        }
     </script>
 </body>
 

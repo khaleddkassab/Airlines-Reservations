@@ -2,7 +2,7 @@
 // get_flight_details.php
 
 // Include your database connection file
-require_once('E:\AppServ\www\Airlines\connection.php');
+require_once('C:\AppServ\www\Airlines\connection.php');
 
 // Check if flight_id is sent via GET request
 if (isset($_GET['flight_id'])) {

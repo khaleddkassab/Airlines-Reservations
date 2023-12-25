@@ -6,53 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Messages</title>
     <style>
-        /* Add your styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    /* Add your styles here */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-        .message-list {
-            margin-top: 20px;
-        }
+    .message-list {
+        margin-top: 20px;
+    }
 
-        .message-list ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
+    .message-list ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
 
-        .message-list li {
-            margin-bottom: 10px;
-        }
+    .message-list li {
+        margin-bottom: 10px;
+    }
 
-        .back-button {
-            text-align: center;
-            margin-top: 20px;
-        }
+    .back-button {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-        .back-button a {
-            padding: 8px 16px;
-            text-decoration: none;
-            background-color: #3498db;
-            color: #fff;
-            border-radius: 5px;
-        }
+    .back-button a {
+        padding: 8px 16px;
+        text-decoration: none;
+        background-color: #3498db;
+        color: #fff;
+        border-radius: 5px;
+    }
 
-        .back-button a:hover {
-            background-color: #2980b9;
-        }
+    .back-button a:hover {
+        background-color: #2980b9;
+    }
     </style>
 </head>
 
@@ -66,7 +66,7 @@
             session_start();
 
             // Include your database connection file
-            require_once('E:\AppServ\www\Airlines\connection.php');
+            require_once('C:\AppServ\www\Airlines\connection.php');
 
             // Check if the user is authorized
             if (isset($_SESSION['user_id'])) {

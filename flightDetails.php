@@ -6,46 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Details</title>
     <style>
-    /* Add your styles here */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    .flight-details {
-        margin-bottom: 20px;
-    }
+        .flight-details {
+            margin-bottom: 20px;
+        }
 
-    .flight-details h2 {
-        margin-bottom: 10px;
-    }
+        .flight-details h2 {
+            margin-bottom: 10px;
+        }
 
-    .flight-details table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        .flight-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .flight-details th,
-    .flight-details td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-    }
+        .flight-details th,
+        .flight-details td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
 
-    .flight-details th {
-        background-color: #f4f4f4;
-    }
+        .flight-details th {
+            background-color: #f4f4f4;
+        }
+
+        .cancel-button {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -54,14 +63,17 @@
         <div class="flight-details">
             <?php
             // Include your database connection file
-            require_once('E:\AppServ\www\Airlines\connection.php');
+            require_once('C:\AppServ\www\Airlines\connection.php');
 
+            $cancelSql = ""; // Define the variable outside the conditional block
+            $cancelSql2 = ""; // Define the variable outside the conditional block
+            
             // Check if the flight ID is provided in the URL
             if (isset($_GET['flight_id'])) {
                 $flightId = $_GET['flight_id'];
 
                 // Retrieve flight details from the database
-                $sql = "SELECT * FROM flight WHERE flight_id = $flightId";
+                $sql = "SELECT * FROM flight WHERE flight_id = $flightId ";
                 $result = $con->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -80,13 +92,49 @@
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['flight_id'])) {
                         // Perform the cancellation logic here
                         $cancelFlightId = $_POST['flight_id'];
+                        $Employee = 'Employee';
 
-                        // Example: Perform a query to cancel the flight (You can replace this with your deletion logic)
-                        $cancelSql = "DELETE FROM flight WHERE flight_id = $cancelFlightId";
-                        if ($con->query($cancelSql) === TRUE) {
-                            echo "<p>Flight canceled successfully.</p>";
+
+                        // Fetch flight fees for refund and company deduction
+                        $flightFeesSql = "SELECT fees FROM flight WHERE flight_id = $cancelFlightId";
+                        $flightFeesResult = $con->query($flightFeesSql);
+
+                        if ($flightFeesResult->num_rows > 0) {
+                            $flightFeesRow = $flightFeesResult->fetch_assoc();
+                            $flightFees = $flightFeesRow['fees'];
+
+                            // Refund the users with payment_type = Visa and user_type = Passenger
+                            $refundSql = "SELECT user_id FROM user_flights WHERE flight_id =$cancelFlightId AND payment_type = 'Visa' AND user_type = 'Passenger'";
+                            $refundResult = $con->query($refundSql);
+
+                            while ($refundRow = $refundResult->fetch_assoc()) {
+                                $userId = $refundRow['user_id'];
+
+                                // Refund flight fees to user's account_balance
+                                $refundUserSql = "UPDATE passenger SET account_balance = account_balance + $flightFees WHERE user_id = $userId";
+                                $con->query($refundUserSql);
+                            }
+
+                            // Deduct refunded fees from the company's account_balance
+                            $companyDeductSql = "UPDATE employee 
+                            SET account_balance = account_balance - $flightFees 
+                            WHERE user_id IN (SELECT user_id FROM user_flights 
+                            WHERE flight_id = $cancelFlightId 
+                            AND user_type = '$Employee' 
+                            AND payment_type IS NULL)";
+                            $con->query($companyDeductSql);
+                            // Example: Perform a query to cancel the flight (You can replace this with your deletion logic)
+                            $cancelSql = "DELETE FROM user_flights WHERE flight_id = $cancelFlightId";
+                            $cancelSql2 = "DELETE FROM flight WHERE flight_id = $cancelFlightId";
+
+                            if ($con->query($cancelSql) === TRUE && $con->query($cancelSql2) === TRUE) {
+
+                                echo "<p>Flight canceled successfully. Refunds processed.</p>";
+                            } else {
+                                echo "<p>Error canceling the flight: " . $con->error . "</p>";
+                            }
                         } else {
-                            echo "<p>Error canceling the flight: " . $con->error . "</p>";
+                            echo "<p>Error retrieving flight fees: " . $con->error . "</p>";
                         }
                     }
 
@@ -101,6 +149,7 @@
             } else {
                 echo "<p>No flight ID provided.</p>";
             }
+
 
             // Close the database connection
             $con->close();

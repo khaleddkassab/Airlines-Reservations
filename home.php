@@ -22,105 +22,105 @@ $userType = $_SESSION['user_type'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Home</title>
     <style>
-        /* Add your styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    /* Add your styles here */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-        .company-info {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .company-info {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-        .company-info img {
-            max-width: 200px;
-            height: auto;
-        }
+    .company-info img {
+        max-width: 200px;
+        height: auto;
+    }
 
-        .flight-list {
-            margin-bottom: 20px;
-        }
+    .flight-list {
+        margin-bottom: 20px;
+    }
 
-        .flight-list h3 {
-            margin-bottom: 10px;
-        }
+    .flight-list h3 {
+        margin-bottom: 10px;
+    }
 
-        .flight-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    .flight-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
 
-        .flight-table th,
-        .flight-table td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
+    .flight-table th,
+    .flight-table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
 
-        .flight-table th {
-            background-color: #f4f4f4;
-        }
+    .flight-table th {
+        background-color: #f4f4f4;
+    }
 
-        .flight-details {
-            display: none;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
+    .flight-details {
+        display: none;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
 
-        .flight-details h3 {
-            margin-top: 0;
-        }
+    .flight-details h3 {
+        margin-top: 0;
+    }
 
-        .show-details {
-            cursor: pointer;
-            color: blue;
-        }
+    .show-details {
+        cursor: pointer;
+        color: blue;
+    }
 
-        .navigation-card {
-            width: fit-content;
-            height: fit-content;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            background-color: rgb(255, 255, 255);
-            padding: 15px 20px;
-            border-radius: 50px;
-        }
+    .navigation-card {
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        background-color: rgb(255, 255, 255);
+        padding: 15px 20px;
+        border-radius: 50px;
+    }
 
-        .tab {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            overflow: hidden;
-            background-color: rgb(252, 252, 252);
-            padding: 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
+    .tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        overflow: hidden;
+        background-color: rgb(252, 252, 252);
+        padding: 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
 
-        .tab:hover {
-            background-color: rgb(223, 223, 223);
-        }
+    .tab:hover {
+        background-color: rgb(223, 223, 223);
+    }
     </style>
 </head>
 
@@ -207,6 +207,11 @@ $userType = $_SESSION['user_type'];
                     } else {
                         echo "<tr><td colspan='4'>No flights available</td></tr>";
                     }
+                    // Display button to view messages
+                    echo "<a href='displaymessage.php' class='message-btn'>View Messages</a>";
+
+                    // Display button to compose a message
+                    echo "<a href='createmessage.php' class='message-btn'>Compose Message</a>";
 
                     // Close the database connection
                     $con->close();
@@ -221,15 +226,15 @@ $userType = $_SESSION['user_type'];
     </div>
 
     <script>
-        // JavaScript to handle displaying flight details
-        const showDetails = document.querySelectorAll('.show-details');
-        showDetails.forEach(row => {
-            row.addEventListener('click', function () {
-                const flightId = this.getAttribute('data-flight-id');
-                // Fetch flight details using AJAX or update details directly
-                // Display flight details in the flight-details section
-            });
+    // JavaScript to handle displaying flight details
+    const showDetails = document.querySelectorAll('.show-details');
+    showDetails.forEach(row => {
+        row.addEventListener('click', function() {
+            const flightId = this.getAttribute('data-flight-id');
+            // Fetch flight details using AJAX or update details directly
+            // Display flight details in the flight-details section
         });
+    });
     </script>
 </body>
 

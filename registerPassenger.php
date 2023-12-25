@@ -45,7 +45,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Retrieve form data
-        $passengerId = isset($_POST['passenger_id']) ? $_POST['passenger_id'] : '';
+        $currentid = isset($_POST['passenger_id']) ? $_POST['passenger_id'] : '';
         // Handle image uploads for photo and passport_img
         $photo = ''; // Store the path or data for photo
         $passportImg = ''; // Store the path or data for passport image
@@ -55,7 +55,7 @@
         // Code to handle file uploads for photo and passport_img (not shown here)
     
         // Insert data into Passenger table
-        $sql = "INSERT INTO passenger (passenger_id, user_id, photo, passport_img, account_balance) VALUES ('$passengerId', '$userId', '$photo', '$passportImg', '$accountBalance')";
+        $sql = "INSERT INTO passenger (passenger_id, user_id, photo, passport_img, account_balance) VALUES ('$currentid', '$userId', '$photo', '$passportImg', '$accountBalance')";
         if ($con->query($sql) === FALSE) {
             echo "Error: " . $sql . "<br>" . $con->error;
         } else {

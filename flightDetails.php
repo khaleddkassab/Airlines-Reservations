@@ -47,13 +47,15 @@
             background-color: #f4f4f4;
         }
 
-        .cancel-button {
+        .cancel-button,
+        .complete-button {
             background-color: #ff0000;
             color: #fff;
             padding: 8px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -64,9 +66,10 @@
             <?php
             // Include your database connection file
             require_once('C:\AppServ\www\Airlines\connection.php');
+            $True = 'true';
 
             $cancelSql = ""; // Define the variable outside the conditional block
-            $cancelSql2 = ""; // Define the variable outside the conditional block
+            $completeSql = ""; // Define the variable outside the conditional block
             
             // Check if the flight ID is provided in the URL
             if (isset($_GET['flight_id'])) {
@@ -89,11 +92,10 @@
                     echo "</table>";
 
                     // Check if the cancellation form has been submitted
-                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['flight_id'])) {
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cancel_flight'])) {
                         // Perform the cancellation logic here
                         $cancelFlightId = $_POST['flight_id'];
                         $Employee = 'Employee';
-
 
                         // Fetch flight fees for refund and company deduction
                         $flightFeesSql = "SELECT fees FROM flight WHERE flight_id = $cancelFlightId";
@@ -122,12 +124,13 @@
                             WHERE flight_id = $cancelFlightId 
                             AND user_type = '$Employee' 
                             AND payment_type IS NULL)";
-                            $con->query($companyDeductSql);
                             // Example: Perform a query to cancel the flight (You can replace this with your deletion logic)
                             $cancelSql = "DELETE FROM user_flights WHERE flight_id = $cancelFlightId";
                             $cancelSql2 = "DELETE FROM flight WHERE flight_id = $cancelFlightId";
 
                             if ($con->query($cancelSql) === TRUE && $con->query($cancelSql2) === TRUE) {
+                                // Execute the deduction statements and cancellation statements here
+                                $con->query($companyDeductSql);
 
                                 echo "<p>Flight canceled successfully. Refunds processed.</p>";
                             } else {
@@ -138,10 +141,31 @@
                         }
                     }
 
-                    // Form for cancelling and deleting the flight
+                    // Form for cancelling the flight
                     echo "<form method='post' action=''>";
                     echo "<input type='hidden' name='flight_id' value='" . $row['flight_id'] . "'>";
-                    echo "<input type='submit' class='cancel-button' value='Cancel Flight'>";
+                    echo "<input type='submit' class='cancel-button' name='cancel_flight' value='Cancel Flight'>";
+                    echo "</form>";
+
+                    // Check if the complete form has been submitted
+                    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['complete_flight'])) {
+                        // Perform the completion logic here
+                        $completeFlightId = $_POST['flight_id'];
+
+                        // Example: Perform a query to update the flight as completed
+                        $completeSql = "UPDATE flight SET completed = true WHERE flight_id = $completeFlightId";
+
+                        if ($con->query($completeSql) === TRUE) {
+                            echo "<p>Flight marked as completed.</p>";
+                        } else {
+                            echo "<p>Error marking the flight as completed: " . $con->error . "</p>";
+                        }
+                    }
+
+                    // Form for completing the flight
+                    echo "<form method='post' action=''>";
+                    echo "<input type='hidden' name='flight_id' value='" . $row['flight_id'] . "'>";
+                    echo "<input type='submit' class='complete-button' name='complete_flight' value='Complete Flight'>";
                     echo "</form>";
                 } else {
                     echo "<p>No flight details available for the provided ID.</p>";
@@ -149,7 +173,6 @@
             } else {
                 echo "<p>No flight ID provided.</p>";
             }
-
 
             // Close the database connection
             $con->close();

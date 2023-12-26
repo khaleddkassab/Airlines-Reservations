@@ -5,9 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passenger Registration</title>
+    <link rel="stylesheet" href="styles.css">
+
     <style>
         /* Add your styles here */
-        /* Similar styles as in the registration page */
+
+        .registration-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .form-group .message {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: red;
+        }
+
+        .submit-btn {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 140px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100px;
+            margin-top: 10px;
+            margin-left: 299px;
+        }
     </style>
 </head>
 
@@ -67,6 +113,34 @@
 
     $con->close();
     ?>
+    <script>
+        var passengerForm = document.getElementById('passengerForm');
+        var accountBalanceInput = document.getElementById('account_balance');
+        var accountBalanceMessage = document.getElementById('accountBalanceMessage');
+
+        accountBalanceInput.addEventListener('input', function () {
+            // You can customize the validation logic based on your requirements
+            var accountBalance = parseFloat(accountBalanceInput.value);
+
+            if (isNaN(accountBalance) || accountBalance < 0) {
+                accountBalanceMessage.textContent = 'Account balance should be a positive number.';
+                accountBalanceMessage.style.color = 'red';
+            } else {
+                accountBalanceMessage.textContent = ''; // Clear the message
+            }
+        });
+
+        passengerForm.addEventListener('submit', function (event) {
+            // You can add additional validation logic here before submitting the form
+            var accountBalance = parseFloat(accountBalanceInput.value);
+
+            if (isNaN(accountBalance) || accountBalance < 0) {
+                accountBalanceMessage.textContent = 'Account balance should be a positive number.';
+                accountBalanceMessage.style.color = 'red';
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
 
 </body>
 

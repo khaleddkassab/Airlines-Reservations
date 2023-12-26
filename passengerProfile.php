@@ -170,16 +170,10 @@
             <a href="editPassengerProfile.php">EDIT PROFILE |</a>
             <a href="logout.php">LOGOUT</a>
         </header>
+
         <?php
         // Start the session
         session_start();
-
-        // Check if the user is not authenticated
-        if (!isset($_SESSION['user_id'])) {
-            // Redirect to unAuthorized.php or login page
-            header("Location: unAuthorized.php");
-            exit(); // Ensure that the script stops execution after redirection
-        }
 
         // Include your database connection file
         require_once('C:\AppServ\www\Airlines\connection.php');
@@ -187,53 +181,34 @@
         // Retrieve the user ID from the session
         $userId = $_SESSION['user_id'];
 
-
-
-        echo "<div class='passenger-profile'>";
         // Display the user's profile based on the user ID
-        $sql = "SELECT * FROM userr WHERE id = $userId";
-        $result = $con->query($sql);
+        $sqlUser = "SELECT * FROM userr WHERE id = $userId";
+        $resultUser = $con->query($sqlUser);
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<img src='' alt='User Image'>";
-                echo "<h2>Name: " . $row['name'] . "</h2>";
-            }
+        // Display the account_balance from the passenger table
+        $sqlPassenger = "SELECT * FROM passenger WHERE user_id = $userId";
+        $resultPassenger = $con->query($sqlPassenger);
 
-            $sql1 = "SELECT * FROM passenger WHERE user_id = $userId";
-            $result2 = $con->query($sql1);
-
-            if ($result2->num_rows > 0) {
-                echo "<div class='passenger-info'>";
-                echo "<h3>Passenger Information</h3>";
-                echo "<ul>";
-                while ($row = $result2->fetch_assoc()) {
-                    echo "<div class='additional-info'>";
-                    echo "<li>Photo: " . $row['photo'] . "</li>";
-                    echo "<li>Account Balance: " . $row['account_balance'] . "</li>";
-                    echo "<li>Passport Image: " . $row['passport_img'] . "</li>";
-                    echo "</div>";
-                    // Display other passenger information as needed
+        if ($resultUser && $resultUser->num_rows > 0) {
+            while ($rowUser = $resultUser->fetch_assoc()) {
+                echo "<img src='images/{$rowUser['image']}' alt='User Image'>";
+                echo "<h2>Name: " . $rowUser['name'] . "</h2>";
+                echo "<div class='additional-info'>";
+                echo "<li>UserName: " . $rowUser['username'] . "</li>";
+                echo "<li>E-mail: " . $rowUser['email'] . "</li>";
+                echo "<li>Telephone: " . $rowUser['tel'] . "</li>";
+                // Display account_balance if available
+                if ($resultPassenger && $resultPassenger->num_rows > 0) {
+                    $rowPassenger = $resultPassenger->fetch_assoc();
+                    echo "<li>Account Balance: $" . $rowPassenger['account_balance'] . "</li>";
+                } else {
+                    echo "<li>Account Balance: N/A</li>";
                 }
-
-                echo "</ul>";
                 echo "</div>";
-
-
-
-            } else {
-                // No passenger profile found for this user
-                echo "<p>No passenger profile found.</p>";
             }
         } else {
-            // No user profile found for the given user ID
             echo "<p>No user profile found.</p>";
         }
-
-        // Logout button
-        
-
-        echo "</div>";
 
         // Close the database connection
         $con->close();

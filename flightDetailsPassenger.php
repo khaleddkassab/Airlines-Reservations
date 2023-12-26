@@ -6,61 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Details</title>
     <style>
-    /* Add your styles here */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    .flight-details {
-        margin-bottom: 20px;
-    }
+        .flight-details {
+            margin-bottom: 20px;
+        }
 
-    .flight-details h2 {
-        margin-bottom: 10px;
-    }
+        .flight-details h2 {
+            margin-bottom: 10px;
+        }
 
-    .flight-details table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        .flight-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .flight-details th,
-    .flight-details td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-    }
+        .flight-details th,
+        .flight-details td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
 
-    .flight-details th {
-        background-color: #f4f4f4;
-    }
+        .flight-details th {
+            background-color: #f4f4f4;
+        }
 
-    input[type='submit'] {
-        background-color: black;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+        input[type='submit'] {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
-    /* Style for when the button is hovered over */
-    input[type='submit']:hover {
-        background-color: #005f75;
-    }
+        /* Style for when the button is hovered over */
+        input[type='submit']:hover {
+            background-color: #005f75;
+        }
     </style>
 </head>
 
@@ -86,11 +86,12 @@
 
             // Retrieve flight ID from the URL
             $flightId = isset($_GET['flight_id']) ? $_GET['flight_id'] : null;
+            echo "<a href='passengerHome.php'><button type='button'>X</button></a>";
 
             // Check if the flight ID is provided in the URL
             if (!$flightId) {
                 // Redirect to a page indicating that no flight ID is provided
-                header("Location: noFlightId.php");
+                header("Location: passengerHome.php");
                 exit();
             }
 

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
     /* Add your styles here */
 
@@ -18,6 +19,7 @@
 
     .form-group {
         margin-bottom: 15px;
+        position: relative;
     }
 
     .form-group label {
@@ -25,27 +27,31 @@
         margin-bottom: 5px;
     }
 
-    .form-group input {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-    }
-
+    .form-group input,
     .form-group textarea {
         width: 100%;
         padding: 8px;
         box-sizing: border-box;
-        height: 80px;
+    }
+
+    .form-group .message {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        color: red;
     }
 
     .submit-btn {
-        background-color: #4caf50;
+        background-color: black;
         color: white;
         padding: 10px;
         border: none;
+        width: 140px;
         border-radius: 5px;
         cursor: pointer;
-        margin-right: 10px;
+        width: 100px;
+        margin-top: 10px;
+        margin-left: 299px;
     }
     </style>
 </head>
@@ -58,24 +64,31 @@
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
+                <div class="message" id="nameMessage"></div>
             </div>
-
 
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
+                <div class="message" id="usernameMessage"></div>
             </div>
+
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
+                <div class="message" id="passwordMessage"></div>
             </div>
+
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
+                <div class="message" id="emailMessage"></div>
             </div>
+
             <div class="form-group">
                 <label for="tel">Telephone:</label>
                 <input type="tel" id="tel" name="tel" required>
+                <div class="message" id="telMessage"></div>
             </div>
 
             <div class="form-group">
@@ -84,14 +97,16 @@
                 <label for="employee">Employee</label><br>
                 <input type="radio" id="passenger" name="user_type" value="passenger">
                 <label for="passenger">Passenger</label><br>
+                <div class="message" id="userTypeMessage"></div>
             </div>
 
             <button type="submit" class="submit-btn">Register</button>
+            <button type="button" class="submit-btn" id="goToLoginBtn">Go to Login</button>
+
         </form>
-        <form method="get" action="login.php">
-            <button type="submit" class="submit-btn">Go to Login</button>
-        </form>
+
     </div>
+
     <?php
     require_once('C:\AppServ\www\Airlines\connection.php');
 
@@ -125,7 +140,101 @@
     $con->close();
     ?>
 
+    <script>
+    var nameInput = document.getElementById('name');
+    var nameMessage = document.getElementById('nameMessage');
 
+    nameInput.addEventListener('input', function() {
+        // You can customize the validation logic based on your requirements
+        if (nameInput.value.length < 3) {
+            nameMessage.textContent = 'Name should be at least 3 characters long.';
+            nameMessage.style.color = 'red';
+        } else {
+            nameMessage.textContent = ''; // Clear the message
+        }
+    });
+
+    var usernameInput = document.getElementById('username');
+    var usernameMessage = document.getElementById('usernameMessage');
+
+    usernameInput.addEventListener('input', function() {
+        // You can customize the validation logic based on your requirements
+        if (usernameInput.value.length < 3) {
+            usernameMessage.textContent = 'Username should be at least 3 characters long.';
+            usernameMessage.style.color = 'red';
+        } else {
+            usernameMessage.textContent = ''; // Clear the message
+        }
+    });
+
+    var passwordInput = document.getElementById('password');
+    var passwordMessage = document.getElementById('passwordMessage');
+
+    passwordInput.addEventListener('input', function() {
+        // You can customize the validation logic based on your requirements
+        if (passwordInput.value.length < 8) {
+            passwordMessage.textContent = 'Password should be at least 8 characters long.';
+            passwordMessage.style.color = 'red';
+        } else {
+            passwordMessage.textContent = ''; // Clear the message
+        }
+    });
+
+    var emailInput = document.getElementById('email');
+    var emailMessage = document.getElementById('emailMessage');
+
+    emailInput.addEventListener('input', function() {
+        // You can customize the validation logic based on your requirements
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(emailInput.value)) {
+            emailMessage.textContent = 'Invalid email format.';
+            emailMessage.style.color = 'red';
+        } else {
+            emailMessage.textContent = ''; // Clear the message
+        }
+    });
+
+    var telInput = document.getElementById('tel');
+    var telMessage = document.getElementById('telMessage');
+
+    telInput.addEventListener('input', function() {
+        // You can customize the validation logic based on your requirements
+        var telPattern = /^\d{10}$/; // Assuming a 10-digit telephone number
+        if (!telPattern.test(telInput.value)) {
+            telMessage.textContent = 'Invalid telephone number format.';
+            telMessage.style.color = 'red';
+        } else {
+            telMessage.textContent = ''; // Clear the message
+        }
+    });
+
+    var userTypeMessage = document.getElementById('userTypeMessage');
+    var employeeRadio = document.getElementById('employee');
+    var passengerRadio = document.getElementById('passenger');
+
+    // Check if at least one user type is selected
+    function validateUserType() {
+        if (!employeeRadio.checked && !passengerRadio.checked) {
+            userTypeMessage.textContent = 'Please select a user type.';
+            userTypeMessage.style.color = 'red';
+        } else {
+            userTypeMessage.textContent = ''; // Clear the message
+        }
+    }
+
+    employeeRadio.addEventListener('change', validateUserType);
+    passengerRadio.addEventListener('change', validateUserType);
+    </script>
+
+    <script>
+    // Get the button elements by their IDs
+    var goToLoginBtn = document.getElementById('goToLoginBtn');
+
+    goToLoginBtn.addEventListener('click', function() {
+        // Redirect to login.php (replace with your actual login page)
+        window.location.href = 'login.php';
+    });
+    </script>
 </body>
 
 </html>

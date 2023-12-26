@@ -63,159 +63,9 @@ $result = $con->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Home</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-    header {
 
-        padding: 15px;
-        text-align: center;
-        margin-left: 450px;
-    }
-
-    /* Styling for the header links */
-    header a {
-        color: black;
-        text-decoration: none;
-        margin: 10px;
-        margin-left: 10px;
-        margin-top: 20px;
-    }
-
-    /* Add your styles here */
-    body {
-
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        background-color: #F0F0F0;
-        margin: 0;
-        padding: 0;
-    }
-
-    .container {
-        max-width: 1100px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        position: relative;
-        background-image: url('images/bg.jpg');
-        /* Replace 'path_to_your_image.jpg' with the actual path to your image */
-        background-size: cover;
-        /* Adjust the background size as needed */
-        background-repeat: no-repeat;
-        background-position: center;
-
-    }
-
-    .company-info {
-        text-align: left;
-        margin-bottom: 20px;
-    }
-
-    .company-info h2 {
-        text-align: center;
-        /* Center the text horizontally */
-    }
-
-    .company-info img {
-        max-width: 200px;
-        height: auto;
-    }
-
-    .flight-list {
-        margin-bottom: 20px;
-    }
-
-    .flight-list h3 {
-        margin-bottom: 10px;
-    }
-
-    .flight-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .flight-table th,
-    .flight-table td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-    }
-
-    .flight-table th {
-        background-color: #f4f4f4;
-    }
-
-    .flight-details {
-        display: none;
-        margin-top: 20px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
-
-    .flight-details h3 {
-        margin-top: 0;
-    }
-
-    .show-details {
-        cursor: pointer;
-        color: blue;
-    }
-
-    .navigation-card {
-        width: fit-content;
-        height: fit-content;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        background-color: rgb(255, 255, 255);
-        padding: 15px 20px;
-        border-radius: 50px;
-    }
-
-    .tab {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
-        overflow: hidden;
-        background-color: rgb(252, 252, 252);
-        padding: 15px;
-        border-radius: 50%;
-        cursor: pointer;
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-
-    .tab:hover {
-        background-color: rgb(223, 223, 223);
-    }
-
-    .logout {
-        position: absolute;
-        top: 10px;
-        /* Adjust the top value as needed */
-        right: 20px;
-        /* Align to the right side */
-    }
-
-    .navigation {
-        display: flex;
-        margin-left: 950px;
-        margin-bottom: 20px;
-    }
-
-    .navigation a {
-        text-decoration: none;
-        padding: 15px;
-        background-color: black;
-        color: #fff;
-        border-radius: 90px;
-        transition: background-color 0.3s ease;
-    }
     </style>
 </head>
 
@@ -287,15 +137,15 @@ $result = $con->query($sql);
     </div>
 
     <script>
-    // JavaScript to handle displaying flight details
-    const showDetails = document.querySelectorAll('.show-details');
-    showDetails.forEach(row => {
-        row.addEventListener('click', function() {
-            const flightId = this.getAttribute('data-flight-id');
-            // Fetch flight details using AJAX or update details directly
-            // Display flight details in the flight-details section
+        // JavaScript to handle displaying flight details
+        const showDetails = document.querySelectorAll('.show-details');
+        showDetails.forEach(row => {
+            row.addEventListener('click', function () {
+                const flightId = this.getAttribute('data-flight-id');
+                // Fetch flight details using AJAX or update details directly
+                // Display flight details in the flight-details section
+            });
         });
-    });
     </script>
 </body>
 

@@ -23,7 +23,26 @@ if ($userType !== 'passenger') {
 // Include your database connection file
 require_once('C:\AppServ\www\Airlines\connection.php');
 
-// Rest of the code remains unchanged
+// Retrieve passenger information from the database
+$true = "true";
+$null = "null";
+$sql2 = "SELECT * FROM userr WHERE id = $userId"; // Assuming $userId holds the user's ID
+$sqlCurrentFlights = "SELECT flight.*, user_flights.* FROM flight
+    INNER JOIN user_flights ON flight.flight_id = user_flights.flight_id
+    WHERE user_flights.user_id = $userId AND flight.completed IS NULL";
+
+$sqlAllFlights = "SELECT * FROM flight WHERE completed IS NULL ";
+
+$sqlDoneFlights = "SELECT flight.*, user_flights.* FROM flight
+    INNER JOIN user_flights ON flight.flight_id = user_flights.flight_id
+    WHERE user_flights.user_id = $userId AND flight.completed = '$true'"; // Updated this line
+
+$result2 = $con->query($sql2);
+$resultCurrentFlights = $con->query($sqlCurrentFlights);
+$resultAllFlights = $con->query($sqlAllFlights);
+$resultDoneFlights = $con->query($sqlDoneFlights);
+
+// Start HTML document
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +54,6 @@ require_once('C:\AppServ\www\Airlines\connection.php');
     <style>
         /* Add your styles here */
         header {
-
             padding: 15px;
             text-align: center;
             margin-left: 450px;
@@ -52,7 +70,6 @@ require_once('C:\AppServ\www\Airlines\connection.php');
 
         /* Add your styles here */
         body {
-
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             background-color: #F0F0F0;
             margin: 0;
@@ -73,7 +90,6 @@ require_once('C:\AppServ\www\Airlines\connection.php');
             /* Adjust the background size as needed */
             background-repeat: no-repeat;
             background-position: center;
-
         }
 
         .company-info {
@@ -192,7 +208,6 @@ require_once('C:\AppServ\www\Airlines\connection.php');
 <body>
     <div class="container">
         <header>
-
             <a href="#"><b>HOME |</b></a>
             <a href="passengerProfile.php">PROFILE |</a>
             <a href="displaymessage.php">NOTIFICATIONS |</a>
@@ -201,15 +216,6 @@ require_once('C:\AppServ\www\Airlines\connection.php');
         </header>
         <div class="passenger-info">
             <?php
-            // Start the session
-            session_start();
-
-            // Include your database connection file
-            require_once('C:\AppServ\www\Airlines\connection.php');
-
-            // Retrieve the user ID from the session
-            $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
-
             // Check if the user is not authenticated
             if (!$userId) {
                 // Redirect to unAuthorized.php
@@ -217,24 +223,7 @@ require_once('C:\AppServ\www\Airlines\connection.php');
                 exit(); // Ensure that the script stops execution after redirection
             }
 
-            // Create a link to the passenger profile with the current user ID
-            // Retrieve passenger information from the database
-            $true = "true";
-            $null = "null";
-            $sql2 = "SELECT * FROM userr WHERE id = $userId"; // Assuming $userId holds the user's ID
-            $sqlCurrentFlights = "SELECT flight.*, user_flights.* FROM flight
-                INNER JOIN user_flights ON flight.flight_id = user_flights.flight_id
-                WHERE user_flights.user_id = $userId AND flight.completed ='$null'";
-            $sqlAllFlights = "SELECT * FROM flight";
-            $sqlDoneFlights = "SELECT flight.*, user_flights.* FROM flight
-                INNER JOIN user_flights ON flight.flight_id = user_flights.flight_id
-                WHERE user_flights.user_id = $userId AND flight.completed = '$true'"; // Updated this line
-            
-            $result2 = $con->query($sql2);
-            $resultCurrentFlights = $con->query($sqlCurrentFlights);
-            $resultAllFlights = $con->query($sqlAllFlights);
-            $resultDoneFlights = $con->query($sqlDoneFlights);
-
+            // Display user information
             if ($result2->num_rows > 0) {
                 $row = $result2->fetch_assoc();
                 // Set user_id in the session
@@ -246,23 +235,19 @@ require_once('C:\AppServ\www\Airlines\connection.php');
 
             echo "<div class='flight-list'>";
 
-
             // Display All Flights
             if ($resultAllFlights->num_rows > 0) {
                 echo "<h3>All Flights</h3>";
-
                 // Add the search form
                 echo "<form method='GET' action=''>";
                 echo "<label for='searchFlight'>Search for a Flight:</label>";
                 echo "<input type='text' id='searchFlight' name='searchFlight' placeholder='Enter flight ID'>";
                 echo "<input type='submit' value='Search'>";
                 echo "</form>";
-
                 echo "<table class='flight-table'>";
                 while ($row = $resultAllFlights->fetch_assoc()) {
                     // Check if a search query is present
                     $searchQuery = isset($_GET['searchFlight']) ? $_GET['searchFlight'] : '';
-
                     // Check if the current row matches the search query
                     if (empty($searchQuery) || stripos($row['flight_id'], $searchQuery) !== false) {
                         echo "<tr>";
@@ -275,18 +260,49 @@ require_once('C:\AppServ\www\Airlines\connection.php');
             } else {
                 echo "<p>No flights available</p>";
             }
-
-
-
-
-
-            // Close the database connection
-            $con->close();
             ?>
         </div>
 
+        <div class="completed-flights">
+            <?php
+            // Display Completed Flights
+            if ($resultDoneFlights->num_rows > 0) {
+                echo "<h3>Completed Flights</h3>";
+                echo "<table class='flight-table'>";
+                while ($row = $resultDoneFlights->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td><a href='flightDetailsPassenger.php?flight_id=" . $row['flight_id'] . "'>" . $row['flight_id'] . "</a></td>";
+                    echo "<td>" . $row['name'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "<p>No completed flights</p>";
+            }
+            ?>
+        </div>
+
+        <div class="booked-flights">
+            <?php
+            // Display Booked Flights
+            if ($resultCurrentFlights->num_rows > 0) {
+                echo "<h3>Booked Flights</h3>";
+                echo "<table class='flight-table'>";
+                while ($row = $resultCurrentFlights->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td><a href='flightDetailsPassenger.php?flight_id=" . $row['flight_id'] . "'>" . $row['flight_id'] . "</a></td>";
+                    echo "<td>" . $row['name'] . "</td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "<p>No booked flights</p>";
+            }
+            ?>
+        </div>
 
     </div>
+
 
     <script>
         // JavaScript to handle displaying flight details

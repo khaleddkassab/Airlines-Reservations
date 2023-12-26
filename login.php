@@ -64,21 +64,40 @@ $con->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-        /* Add your styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+        .header {
+            background-color: #f2f2f2;
+            color: black;
+            padding: 30px;
+        }
+
+        .header h1 {
             margin: 0;
-            padding: 0;
+            display: inline;
+        }
+
+        body {
+            background-image: url('images/backgroundregister.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: This keeps the background fixed while scrolling */
         }
 
         .login-form {
             max-width: 400px;
-            margin: 20px auto;
+            margin: 150px auto;
             padding: 20px;
-            background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 5px;
+            background-color: #f2f2f2;
+
+        }
+
+        .right-aligned-logo {
+            float: right;
+            margin-right: 50px;
+            /* Optional: Add some spacing to the right of the image */
         }
 
         .form-group {
@@ -97,20 +116,34 @@ $con->close();
         }
 
         .submit-btn {
-            background-color: #4caf50;
+            background-color: black;
             color: white;
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 100px;
+            margin-top: 10px;
+            margin-left: 299px;
+        }
+
+        .about-section {
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
+    <div class="header">
+        <h1>Welcome to Flyght</h1>
+        <img src="images/logo.png" alt="Logo description" width="200" height="50" class="right-aligned-logo">
+    </div>
     <div class="login-form">
         <h2>Login</h2>
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <form method="post" action="">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -121,11 +154,10 @@ $con->close();
             </div>
             <button type="submit" class="submit-btn">Login</button>
         </form>
-
-        <!-- Button for redirecting to register page -->
-        <form method="get" action="register.php">
-            <button type="submit" class="submit-btn">Register</button>
-        </form>
+    </div>
+    <div class="about-section">
+        <h1><b>About</b></h1>
+        <p>Soar Beyond Boundaries: Your Journey, Our Expertise!</p>
     </div>
 </body>
 

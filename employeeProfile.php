@@ -57,14 +57,15 @@
     .edit-button a {
         padding: 8px 16px;
         text-decoration: none;
-        background-color: #3498db;
+        background-color: black;
         color: #fff;
         border-radius: 5px;
         margin-right: 10px;
     }
 
     .edit-button a:hover {
-        background-color: #2980b9;
+        background-color: #fff;
+        color: black;
     }
     </style>
 </head>

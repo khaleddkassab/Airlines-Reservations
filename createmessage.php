@@ -6,55 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Message</title>
     <style>
-        /* Add your styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    /* Add your styles here */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-        form {
-            margin-top: 20px;
-        }
+    input[type="submit"] {
+        padding: 8px 16px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
+    input[type="submit"]:hover {
+        background-color: #2980b9;
 
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-        }
+    }
 
-        input[type="submit"] {
-            padding: 8px 16px;
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+    form {
+        margin-top: 20px;
+    }
 
-        input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-        .return-button {
-            margin-top: 20px;
-        }
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+
+
+    .return-button {
+        margin-top: 20px;
+    }
     </style>
 </head>
 
@@ -100,7 +103,7 @@
             <?php
             $returnPage = ($userType === 'passenger') ? 'passengerHome.php' : 'home.php';
             ?>
-            <a href="<?php echo $returnPage; ?>"><button type="button">Return to Home</button></a>
+            <a href="<?php echo $returnPage; ?>"><input type="submit" value="Return to Home"></button></a>
         </div>
 
         <h1>Create Message</h1>

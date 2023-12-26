@@ -46,6 +46,20 @@
         .return-button {
             margin-top: 20px;
         }
+
+        input[type="submit"] {
+            padding: 8px 16px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+
+        }
     </style>
 </head>
 
@@ -135,7 +149,7 @@
                 <?php
                 $returnPage = ($userType === 'employee') ? 'home.php' : 'passengerHome.php';
                 ?>
-                <a href="<?php echo $returnPage; ?>"><button type="button">Return to Home</button></a>
+                <a href="<?php echo $returnPage; ?>"><input type="submit" value="Return to Home"></a>
             </div>
         </div>
     </div>

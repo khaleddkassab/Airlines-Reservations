@@ -96,6 +96,7 @@
                         // Perform the cancellation logic here
                         $cancelFlightId = $_POST['flight_id'];
                         $Employee = 'Employee';
+                        $Passenger = 'Passenger';
 
                         // Fetch flight fees for refund and company deduction
                         $flightFeesSql = "SELECT fees FROM flight WHERE flight_id = $cancelFlightId";
@@ -106,7 +107,7 @@
                             $flightFees = $flightFeesRow['fees'];
 
                             // Refund the users with payment_type = Visa and user_type = Passenger
-                            $refundSql = "SELECT user_id FROM user_flights WHERE flight_id =$cancelFlightId AND payment_type = 'Visa' AND user_type = 'Passenger'";
+                            $refundSql = "SELECT user_id FROM user_flights WHERE flight_id =$cancelFlightId AND payment_type = 'VISA' AND user_type = 'Passenger'";
                             $refundResult = $con->query($refundSql);
 
                             while ($refundRow = $refundResult->fetch_assoc()) {
@@ -119,19 +120,24 @@
 
                             // Deduct refunded fees from the company's account_balance
                             $companyDeductSql = "UPDATE employee 
-                            SET account_balance = account_balance - $flightFees 
+                            SET account_balance = account_balance - ($flightFees * 
+                                (SELECT COUNT(*) FROM user_flights 
+                                 WHERE flight_id = $cancelFlightId 
+                                   AND user_type = 'Passenger' 
+                                   AND payment_type ='VISA'))
                             WHERE user_id IN (SELECT user_id FROM user_flights 
-                            WHERE flight_id = $cancelFlightId 
-                            AND user_type = '$Employee' 
-                            AND payment_type IS NULL)";
+                                              WHERE flight_id = $cancelFlightId 
+                                                AND user_type = '$Employee' 
+                                                AND payment_type IS NULL)";
+
                             // Example: Perform a query to cancel the flight (You can replace this with your deletion logic)
                             $cancelSql = "DELETE FROM user_flights WHERE flight_id = $cancelFlightId";
                             $cancelSql2 = "DELETE FROM flight WHERE flight_id = $cancelFlightId";
+                            $con->query($companyDeductSql);
 
                             if ($con->query($cancelSql) === TRUE && $con->query($cancelSql2) === TRUE) {
                                 // Execute the deduction statements and cancellation statements here
-                                $con->query($companyDeductSql);
-
+            
                                 echo "<p>Flight canceled successfully. Refunds processed.</p>";
                             } else {
                                 echo "<p>Error canceling the flight: " . $con->error . "</p>";

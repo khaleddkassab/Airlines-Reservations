@@ -51,6 +51,9 @@ $con->close();
     <title>Edit Profile</title>
     <!-- Add your styles or link external stylesheets here -->
     <!-- Include your stylesheets, if any -->
+    <style>
+
+    </style>
 </head>
 
 <body>

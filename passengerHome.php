@@ -34,28 +34,59 @@ require_once('C:\AppServ\www\Airlines\connection.php');
     <title>Passenger Home</title>
     <style>
         /* Add your styles here */
+        header {
+
+            padding: 15px;
+            text-align: center;
+            margin-left: 450px;
+        }
+
+        /* Styling for the header links */
+        header a {
+            color: black;
+            text-decoration: none;
+            margin: 10px;
+            margin-left: 10px;
+            margin-top: 20px;
+        }
+
+        /* Add your styles here */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: #F0F0F0;
             margin: 0;
             padding: 0;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1100px;
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 5px;
+            position: relative;
+            background-image: url('images/bg.jpg');
+            /* Replace 'path_to_your_image.jpg' with the actual path to your image */
+            background-size: cover;
+            /* Adjust the background size as needed */
+            background-repeat: no-repeat;
+            background-position: center;
+
         }
 
-        .passenger-info {
-            text-align: center;
+        .company-info {
+            text-align: left;
             margin-bottom: 20px;
         }
 
-        .passenger-info img {
+        .company-info h2 {
+            text-align: center;
+            /* Center the text horizontally */
+        }
+
+        .company-info img {
             max-width: 200px;
             height: auto;
         }
@@ -102,56 +133,72 @@ require_once('C:\AppServ\www\Airlines\connection.php');
             color: blue;
         }
 
-        .logout-btn,
-        .profile-btn,
-        .message-btn {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 16px;
-            text-decoration: none;
-            background-color: #3498db;
-            color: #fff;
-            border-radius: 5px;
+        .navigation-card {
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            background-color: rgb(255, 255, 255);
+            padding: 15px 20px;
+            border-radius: 50px;
         }
 
-        .logout-btn:hover,
-        .profile-btn:hover,
-        .message-btn:hover {
-            background-color: #2980b9;
-        }
-
-        /* Add styles for the search form */
-        form {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"] {
-            width: 200px;
-            padding: 5px;
-        }
-
-        input[type="submit"] {
-            padding: 5px 10px;
-            background-color: #3498db;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
+        .tab {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            background-color: rgb(252, 252, 252);
+            padding: 15px;
+            border-radius: 50%;
             cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
         }
 
-        input[type="submit"]:hover {
-            background-color: #2980b9;
+        .tab:hover {
+            background-color: rgb(223, 223, 223);
+        }
+
+        .logout {
+            position: absolute;
+            top: 10px;
+            /* Adjust the top value as needed */
+            right: 20px;
+            /* Align to the right side */
+        }
+
+        .navigation {
+            display: flex;
+            margin-left: 950px;
+            margin-bottom: 20px;
+        }
+
+        .navigation a {
+            text-decoration: none;
+            padding: 15px;
+            background-color: black;
+            color: #fff;
+            border-radius: 90px;
+            transition: background-color 0.3s ease;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <header>
+
+            <a href="#"><b>HOME |</b></a>
+            <a href="passengerProfile.php">PROFILE |</a>
+            <a href="displaymessage.php">NOTIFICATIONS |</a>
+            <a href="createmessage.php">SEND MESSAGE |</a>
+            <a href="logout.php">LOGOUT</a>
+        </header>
         <div class="passenger-info">
             <?php
             // Start the session
@@ -199,6 +246,7 @@ require_once('C:\AppServ\www\Airlines\connection.php');
 
             echo "<div class='flight-list'>";
 
+
             // Display All Flights
             if ($resultAllFlights->num_rows > 0) {
                 echo "<h3>All Flights</h3>";
@@ -228,22 +276,16 @@ require_once('C:\AppServ\www\Airlines\connection.php');
                 echo "<p>No flights available</p>";
             }
 
-            // ... (Your existing PHP code)
-            
-            // Display button to view messages
-            echo "<a href='displaymessage.php' class='message-btn'>View Messages</a>";
 
-            // Display button to compose a message
-            echo "<a href='createmessage.php' class='message-btn'>Compose Message</a>";
+
+
 
             // Close the database connection
             $con->close();
             ?>
         </div>
 
-        <!-- Your existing logout and profile buttons -->
-        <a href="logout.php" class="logout-btn">Logout</a>
-        <a href="passengerProfile.php" class="profile-btn">Profile</a>
+
     </div>
 
     <script>

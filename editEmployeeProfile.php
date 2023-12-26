@@ -83,6 +83,10 @@
             <input type="text" id="companyAddress" name="companyAddress" value="<?php echo $companyAddress; ?>"><br><br>
 
             <input type="submit" value="Save Changes">
+
+            <!-- Return button -->
+            <a href="employeeProfile.php?user_id=<?php echo $userId; ?>"><button type="button">Return to
+                    Profile</button></a>
         </form>
     </div>
 </body>

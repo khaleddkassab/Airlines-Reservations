@@ -51,6 +51,10 @@
         input[type="submit"]:hover {
             background-color: #2980b9;
         }
+
+        .return-button {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -62,6 +66,7 @@
 
         // Include your database connection file
         require_once('C:\AppServ\www\Airlines\connection.php');
+        $userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : null;
 
         // Check if the form is submitted
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -69,15 +74,16 @@
             $destinationUserId = $_POST['destination_user_id'];
             $messageContent = $_POST['message_content'];
 
-            // Retrieve passenger_id from the session
-            $currentid = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+            // Retrieve user_id and user_type from the session
+            $currentId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+            $userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : null;
 
-            if (!$currentid) {
-                echo "<p>Error: Passenger ID not found in the session</p>";
+            if (!$currentId || !$userType || $userType == null) {
+                echo "<p>Error: User ID or User Type not found in the session</p>";
             } else {
                 // Insert into the message table
                 $insertSql = "INSERT INTO message (time, message, from_id, to_id) 
-                              VALUES (NOW(), '$messageContent',$currentid ,$destinationUserId )";
+                              VALUES (NOW(), '$messageContent', $currentId, $destinationUserId)";
 
                 if ($con->query($insertSql) === TRUE) {
                     echo "<p>Message created successfully</p>";
@@ -90,6 +96,12 @@
             $con->close();
         }
         ?>
+        <div class="return-button">
+            <?php
+            $returnPage = ($userType === 'passenger') ? 'passengerHome.php' : 'home.php';
+            ?>
+            <a href="<?php echo $returnPage; ?>"><button type="button">Return to Home</button></a>
+        </div>
 
         <h1>Create Message</h1>
         <form method="post" action="">

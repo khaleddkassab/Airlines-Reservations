@@ -42,6 +42,10 @@
         .message-table th {
             background-color: #f4f4f4;
         }
+
+        .return-button {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -54,18 +58,19 @@
         // Include your database connection file
         require_once('C:\AppServ\www\Airlines\connection.php');
 
-        // Retrieve passenger_id from the session
-        $currentid = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+        // Retrieve user_id and user_type from the session
+        $currentId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+        $userType = isset($_SESSION['user_type']) ? $_SESSION['user_type'] : null;
 
-        if (!$currentid) {
-            echo "<p>Error: Passenger ID not found in the session</p>";
+        if (!$currentId || !$userType) {
+            echo "<p>Error: User ID or User Type not found in the session</p>";
         } else {
             // Retrieve sent messages
-            $sentMessagesSql = "SELECT * FROM message WHERE from_id = $currentid";
+            $sentMessagesSql = "SELECT * FROM message WHERE from_id = $currentId";
             $sentMessagesResult = $con->query($sentMessagesSql);
 
             // Retrieve received messages
-            $receivedMessagesSql = "SELECT * FROM message WHERE to_id = $currentid";
+            $receivedMessagesSql = "SELECT * FROM message WHERE to_id = $currentId";
             $receivedMessagesResult = $con->query($receivedMessagesSql);
         }
         ?>
@@ -124,8 +129,15 @@
             <?php else: ?>
                 <p>No received messages available</p>
             <?php endif; ?>
-        </div>
 
+            <!-- Return button based on user type -->
+            <div class="return-button">
+                <?php
+                $returnPage = ($userType === 'employee') ? 'home.php' : 'passengerHome.php';
+                ?>
+                <a href="<?php echo $returnPage; ?>"><button type="button">Return to Home</button></a>
+            </div>
+        </div>
     </div>
 </body>
 

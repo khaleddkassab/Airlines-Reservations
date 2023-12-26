@@ -1,3 +1,30 @@
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    // Redirect to unAuthorized.php if not logged in
+    header("Location: unAuthorized.php");
+    exit();
+}
+
+// Access user data from the session
+$userId = $_SESSION['user_id'];
+$userType = $_SESSION['user_type'];
+
+// Check if the user is not authorized
+if ($userType !== 'passenger') {
+    // Redirect unauthorized users to unAuthorized.php
+    header("Location: unAuthorized.php");
+    exit();
+}
+
+// Include your database connection file
+require_once('C:\AppServ\www\Airlines\connection.php');
+
+// Rest of the code remains unchanged
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,120 +33,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passenger Home</title>
     <style>
-    /* Add your styles here */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    .passenger-info {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+        .passenger-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .passenger-info img {
-        max-width: 200px;
-        height: auto;
-    }
+        .passenger-info img {
+            max-width: 200px;
+            height: auto;
+        }
 
-    .flight-list {
-        margin-bottom: 20px;
-    }
+        .flight-list {
+            margin-bottom: 20px;
+        }
 
-    .flight-list h3 {
-        margin-bottom: 10px;
-    }
+        .flight-list h3 {
+            margin-bottom: 10px;
+        }
 
-    .flight-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        .flight-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    .flight-table th,
-    .flight-table td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: left;
-    }
+        .flight-table th,
+        .flight-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
 
-    .flight-table th {
-        background-color: #f4f4f4;
-    }
+        .flight-table th {
+            background-color: #f4f4f4;
+        }
 
-    .flight-details {
-        display: none;
-        margin-top: 20px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
+        .flight-details {
+            display: none;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
 
-    .flight-details h3 {
-        margin-top: 0;
-    }
+        .flight-details h3 {
+            margin-top: 0;
+        }
 
-    .show-details {
-        cursor: pointer;
-        color: blue;
-    }
+        .show-details {
+            cursor: pointer;
+            color: blue;
+        }
 
-    .logout-btn,
-    .profile-btn,
-    .message-btn {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 8px 16px;
-        text-decoration: none;
-        background-color: #3498db;
-        color: #fff;
-        border-radius: 5px;
-    }
+        .logout-btn,
+        .profile-btn,
+        .message-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            text-decoration: none;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+        }
 
-    .logout-btn:hover,
-    .profile-btn:hover,
-    .message-btn:hover {
-        background-color: #2980b9;
-    }
+        .logout-btn:hover,
+        .profile-btn:hover,
+        .message-btn:hover {
+            background-color: #2980b9;
+        }
 
-    /* Add styles for the search form */
-    form {
-        margin-bottom: 15px;
-    }
+        /* Add styles for the search form */
+        form {
+            margin-bottom: 15px;
+        }
 
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    input[type="text"] {
-        width: 200px;
-        padding: 5px;
-    }
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+        }
 
-    input[type="submit"] {
-        padding: 5px 10px;
-        background-color: #3498db;
-        color: #fff;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-    }
+        input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
 
-    input[type="submit"]:hover {
-        background-color: #2980b9;
-    }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 
@@ -155,7 +182,7 @@
             $sqlDoneFlights = "SELECT flight.*, user_flights.* FROM flight
                 INNER JOIN user_flights ON flight.flight_id = user_flights.flight_id
                 WHERE user_flights.user_id = $userId AND flight.completed = '$true'"; // Updated this line
-
+            
             $result2 = $con->query($sql2);
             $resultCurrentFlights = $con->query($sqlCurrentFlights);
             $resultAllFlights = $con->query($sqlAllFlights);
@@ -202,7 +229,7 @@
             }
 
             // ... (Your existing PHP code)
-
+            
             // Display button to view messages
             echo "<a href='displaymessage.php' class='message-btn'>View Messages</a>";
 
@@ -220,8 +247,8 @@
     </div>
 
     <script>
-    // JavaScript to handle displaying flight details
-    // ... (Your JavaScript code remains unchanged)
+        // JavaScript to handle displaying flight details
+        // ... (Your JavaScript code remains unchanged)
     </script>
 </body>
 

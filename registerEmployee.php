@@ -16,6 +16,7 @@
         padding: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
+        background-color: #f2f2f2;
     }
 
     .form-group {
@@ -50,9 +51,17 @@
         width: 140px;
         border-radius: 5px;
         cursor: pointer;
-        width: 100px;
+        width: 200px;
         margin-top: 10px;
-        margin-left: 299px;
+        margin-left: 400px;
+    }
+
+    body {
+        background-image: url('background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
     }
     </style>
 </head>

@@ -8,52 +8,69 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* Add your styles here */
+    /* Add your styles here */
 
-        .registration-form {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    .registration-form {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f2f2f2;
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-            position: relative;
-        }
+    body {
+        background-image: url('background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
+    .form-group {
+        margin-bottom: 15px;
+        position: relative;
+    }
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-        .form-group .message {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            color: red;
-        }
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
 
-        .submit-btn {
-            background-color: black;
-            color: white;
-            padding: 10px;
-            border: none;
-            width: 140px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100px;
-            margin-top: 10px;
-            margin-left: 299px;
-        }
+    .form-group .message {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        color: red;
+    }
+
+    .submit-btn {
+        background-color: black;
+        color: white;
+        padding: 10px;
+        border: none;
+        width: 140px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 200px;
+        margin-top: 10px;
+        margin-left: 400px;
+    }
+
+    body {
+        background-image: url('background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
     </style>
 </head>
 
@@ -114,32 +131,32 @@
     $con->close();
     ?>
     <script>
-        var passengerForm = document.getElementById('passengerForm');
-        var accountBalanceInput = document.getElementById('account_balance');
-        var accountBalanceMessage = document.getElementById('accountBalanceMessage');
+    var passengerForm = document.getElementById('passengerForm');
+    var accountBalanceInput = document.getElementById('account_balance');
+    var accountBalanceMessage = document.getElementById('accountBalanceMessage');
 
-        accountBalanceInput.addEventListener('input', function () {
-            // You can customize the validation logic based on your requirements
-            var accountBalance = parseFloat(accountBalanceInput.value);
+    accountBalanceInput.addEventListener('input', function() {
+        // You can customize the validation logic based on your requirements
+        var accountBalance = parseFloat(accountBalanceInput.value);
 
-            if (isNaN(accountBalance) || accountBalance < 0) {
-                accountBalanceMessage.textContent = 'Account balance should be a positive number.';
-                accountBalanceMessage.style.color = 'red';
-            } else {
-                accountBalanceMessage.textContent = ''; // Clear the message
-            }
-        });
+        if (isNaN(accountBalance) || accountBalance < 0) {
+            accountBalanceMessage.textContent = 'Account balance should be a positive number.';
+            accountBalanceMessage.style.color = 'red';
+        } else {
+            accountBalanceMessage.textContent = ''; // Clear the message
+        }
+    });
 
-        passengerForm.addEventListener('submit', function (event) {
-            // You can add additional validation logic here before submitting the form
-            var accountBalance = parseFloat(accountBalanceInput.value);
+    passengerForm.addEventListener('submit', function(event) {
+        // You can add additional validation logic here before submitting the form
+        var accountBalance = parseFloat(accountBalanceInput.value);
 
-            if (isNaN(accountBalance) || accountBalance < 0) {
-                accountBalanceMessage.textContent = 'Account balance should be a positive number.';
-                accountBalanceMessage.style.color = 'red';
-                event.preventDefault(); // Prevent form submission
-            }
-        });
+        if (isNaN(accountBalance) || accountBalance < 0) {
+            accountBalanceMessage.textContent = 'Account balance should be a positive number.';
+            accountBalanceMessage.style.color = 'red';
+            event.preventDefault(); // Prevent form submission
+        }
+    });
     </script>
 
 </body>

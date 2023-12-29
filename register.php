@@ -7,52 +7,63 @@
     <title>Registration Page</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-    /* Add your styles here */
+        /* Add your styles here */
 
-    .registration-form {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .registration-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f2f2f2;
 
-    .form-group {
-        margin-bottom: 15px;
-        position: relative;
-    }
 
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-    }
+        }
 
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 8px;
-        box-sizing: border-box;
-    }
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
 
-    .form-group .message {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        color: red;
-    }
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
 
-    .submit-btn {
-        background-color: black;
-        color: white;
-        padding: 10px;
-        border: none;
-        width: 140px;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 100px;
-        margin-top: 10px;
-        margin-left: 299px;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .form-group .message {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            color: red;
+        }
+
+        .submit-btn {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 140px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100px;
+            margin-top: 10px;
+            margin-left: 299px;
+        }
     </style>
 </head>
 
@@ -141,99 +152,99 @@
     ?>
 
     <script>
-    var nameInput = document.getElementById('name');
-    var nameMessage = document.getElementById('nameMessage');
+        var nameInput = document.getElementById('name');
+        var nameMessage = document.getElementById('nameMessage');
 
-    nameInput.addEventListener('input', function() {
-        // You can customize the validation logic based on your requirements
-        if (nameInput.value.length < 3) {
-            nameMessage.textContent = 'Name should be at least 3 characters long.';
-            nameMessage.style.color = 'red';
-        } else {
-            nameMessage.textContent = ''; // Clear the message
+        nameInput.addEventListener('input', function () {
+            // You can customize the validation logic based on your requirements
+            if (nameInput.value.length < 3) {
+                nameMessage.textContent = 'Name should be at least 3 characters long.';
+                nameMessage.style.color = 'red';
+            } else {
+                nameMessage.textContent = ''; // Clear the message
+            }
+        });
+
+        var usernameInput = document.getElementById('username');
+        var usernameMessage = document.getElementById('usernameMessage');
+
+        usernameInput.addEventListener('input', function () {
+            // You can customize the validation logic based on your requirements
+            if (usernameInput.value.length < 3) {
+                usernameMessage.textContent = 'Username should be at least 3 characters long.';
+                usernameMessage.style.color = 'red';
+            } else {
+                usernameMessage.textContent = ''; // Clear the message
+            }
+        });
+
+        var passwordInput = document.getElementById('password');
+        var passwordMessage = document.getElementById('passwordMessage');
+
+        passwordInput.addEventListener('input', function () {
+            // You can customize the validation logic based on your requirements
+            if (passwordInput.value.length < 8) {
+                passwordMessage.textContent = 'Password should be at least 8 characters long.';
+                passwordMessage.style.color = 'red';
+            } else {
+                passwordMessage.textContent = ''; // Clear the message
+            }
+        });
+
+        var emailInput = document.getElementById('email');
+        var emailMessage = document.getElementById('emailMessage');
+
+        emailInput.addEventListener('input', function () {
+            // You can customize the validation logic based on your requirements
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(emailInput.value)) {
+                emailMessage.textContent = 'Invalid email format.';
+                emailMessage.style.color = 'red';
+            } else {
+                emailMessage.textContent = ''; // Clear the message
+            }
+        });
+
+        var telInput = document.getElementById('tel');
+        var telMessage = document.getElementById('telMessage');
+
+        telInput.addEventListener('input', function () {
+            // You can customize the validation logic based on your requirements
+            var telPattern = /^\d{10}$/; // Assuming a 10-digit telephone number
+            if (!telPattern.test(telInput.value)) {
+                telMessage.textContent = 'Invalid telephone number format.';
+                telMessage.style.color = 'red';
+            } else {
+                telMessage.textContent = ''; // Clear the message
+            }
+        });
+
+        var userTypeMessage = document.getElementById('userTypeMessage');
+        var employeeRadio = document.getElementById('employee');
+        var passengerRadio = document.getElementById('passenger');
+
+        // Check if at least one user type is selected
+        function validateUserType() {
+            if (!employeeRadio.checked && !passengerRadio.checked) {
+                userTypeMessage.textContent = 'Please select a user type.';
+                userTypeMessage.style.color = 'red';
+            } else {
+                userTypeMessage.textContent = ''; // Clear the message
+            }
         }
-    });
 
-    var usernameInput = document.getElementById('username');
-    var usernameMessage = document.getElementById('usernameMessage');
-
-    usernameInput.addEventListener('input', function() {
-        // You can customize the validation logic based on your requirements
-        if (usernameInput.value.length < 3) {
-            usernameMessage.textContent = 'Username should be at least 3 characters long.';
-            usernameMessage.style.color = 'red';
-        } else {
-            usernameMessage.textContent = ''; // Clear the message
-        }
-    });
-
-    var passwordInput = document.getElementById('password');
-    var passwordMessage = document.getElementById('passwordMessage');
-
-    passwordInput.addEventListener('input', function() {
-        // You can customize the validation logic based on your requirements
-        if (passwordInput.value.length < 8) {
-            passwordMessage.textContent = 'Password should be at least 8 characters long.';
-            passwordMessage.style.color = 'red';
-        } else {
-            passwordMessage.textContent = ''; // Clear the message
-        }
-    });
-
-    var emailInput = document.getElementById('email');
-    var emailMessage = document.getElementById('emailMessage');
-
-    emailInput.addEventListener('input', function() {
-        // You can customize the validation logic based on your requirements
-        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        if (!emailPattern.test(emailInput.value)) {
-            emailMessage.textContent = 'Invalid email format.';
-            emailMessage.style.color = 'red';
-        } else {
-            emailMessage.textContent = ''; // Clear the message
-        }
-    });
-
-    var telInput = document.getElementById('tel');
-    var telMessage = document.getElementById('telMessage');
-
-    telInput.addEventListener('input', function() {
-        // You can customize the validation logic based on your requirements
-        var telPattern = /^\d{10}$/; // Assuming a 10-digit telephone number
-        if (!telPattern.test(telInput.value)) {
-            telMessage.textContent = 'Invalid telephone number format.';
-            telMessage.style.color = 'red';
-        } else {
-            telMessage.textContent = ''; // Clear the message
-        }
-    });
-
-    var userTypeMessage = document.getElementById('userTypeMessage');
-    var employeeRadio = document.getElementById('employee');
-    var passengerRadio = document.getElementById('passenger');
-
-    // Check if at least one user type is selected
-    function validateUserType() {
-        if (!employeeRadio.checked && !passengerRadio.checked) {
-            userTypeMessage.textContent = 'Please select a user type.';
-            userTypeMessage.style.color = 'red';
-        } else {
-            userTypeMessage.textContent = ''; // Clear the message
-        }
-    }
-
-    employeeRadio.addEventListener('change', validateUserType);
-    passengerRadio.addEventListener('change', validateUserType);
+        employeeRadio.addEventListener('change', validateUserType);
+        passengerRadio.addEventListener('change', validateUserType);
     </script>
 
     <script>
-    // Get the button elements by their IDs
-    var goToLoginBtn = document.getElementById('goToLoginBtn');
+        // Get the button elements by their IDs
+        var goToLoginBtn = document.getElementById('goToLoginBtn');
 
-    goToLoginBtn.addEventListener('click', function() {
-        // Redirect to login.php (replace with your actual login page)
-        window.location.href = 'login.php';
-    });
+        goToLoginBtn.addEventListener('click', function () {
+            // Redirect to login.php (replace with your actual login page)
+            window.location.href = 'login.php';
+        });
     </script>
 </body>
 

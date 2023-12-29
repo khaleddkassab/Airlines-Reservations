@@ -6,58 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Message</title>
     <style>
-    /* Add your styles here */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+        /* Add your styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    input[type="submit"] {
-        padding: 8px 16px;
-        background-color: black;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        input[type="submit"] {
+            padding: 8px 16px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    input[type="submit"]:hover {
-        background-color: #2980b9;
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
 
-    }
+        form {
+            margin-top: 20px;
+        }
 
-    form {
-        margin-top: 20px;
-    }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    label {
-        display: block;
-        margin-bottom: 5px;
-    }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
 
-    input[type="text"],
-    textarea {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-    }
-
-
-
-    .return-button {
-        margin-top: 20px;
-    }
+        .return-button {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -99,6 +96,7 @@
             $con->close();
         }
         ?>
+
         <div class="return-button">
             <?php
             $returnPage = ($userType === 'passenger') ? 'passengerHome.php' : 'home.php';
@@ -107,7 +105,7 @@
         </div>
 
         <h1>Create Message</h1>
-        <form method="post" action="">
+        <form method="post" action="" onsubmit="return validateForm()">
             <label for="destination_user_id">Destination User ID:</label>
             <input type="text" id="destination_user_id" name="destination_user_id" required>
 
@@ -116,6 +114,26 @@
 
             <input type="submit" value="Send Message">
         </form>
+
+        <script>
+            function validateForm() {
+                // Validate that the message content has at least one character
+                var messageContent = document.getElementById('message_content').value;
+                if (messageContent.trim().length === 0) {
+                    alert('Please enter at least one character in the message content.');
+                    return false;
+                }
+
+                // Validate that the destination user ID is a valid integer
+                var destinationUserId = document.getElementById('destination_user_id').value;
+                if (isNaN(destinationUserId) || destinationUserId.indexOf('.') !== -1) {
+                    alert('Please enter a valid integer for the destination user ID.');
+                    return false;
+                }
+
+                return true;
+            }
+        </script>
     </div>
 </body>
 

@@ -68,82 +68,85 @@ $con->close();
     <title>Login Page</title>
     <!-- Styles -->
     <style>
-        .header {
-            background-color: #f2f2f2;
-            color: black;
-            padding: 30px;
-        }
+    .header {
+        background-color: #f2f2f2;
+        color: black;
+        padding: 30px;
+    }
 
-        .header h1 {
-            margin: 0;
-            display: inline;
-        }
+    .header h1 {
+        margin: 0;
+        display: inline;
+    }
 
-        body {
-            background-image: url('images/backgroundregister.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            /* Optional: This keeps the background fixed while scrolling */
-        }
+    h1 {
+        display: inline;
+    }
 
-        .login-form {
-            max-width: 400px;
-            margin: 150px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f2f2f2;
+    body {
+        background-image: url('background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
 
-        }
+    .login-form {
+        max-width: 400px;
+        margin: 150px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f2f2f2;
 
-        .right-aligned-logo {
-            float: right;
-            margin-right: 50px;
-            /* Optional: Add some spacing to the right of the image */
-        }
+    }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+    .right-aligned-logo {
+        float: right;
+        margin-right: 50px;
+        /* Optional: Add some spacing to the right of the image */
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
+    .form-group {
+        margin-bottom: 15px;
+    }
 
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-        .submit-btn {
-            background-color: black;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100px;
-            margin-top: 10px;
-            margin-left: 299px;
-        }
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
 
-        .about-section {
-            background-color: #f2f2f2;
-            padding: 20px;
-            margin-top: 30px;
-            text-align: center;
-        }
+    .submit-btn {
+        background-color: black;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100px;
+        margin-top: 10px;
+        margin-left: 299px;
+    }
 
-        /* Add style for the error message */
-        #invalidCredentialsMsg {
-            color: red;
-            display: none;
-            text-align: center;
-        }
+    .about-section {
+        background-color: #f2f2f2;
+        padding: 20px;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    /* Add style for the error message */
+    #invalidCredentialsMsg {
+        color: red;
+        display: none;
+        text-align: center;
+    }
     </style>
 </head>
 
@@ -151,7 +154,7 @@ $con->close();
     <div class="header">
         <h1>Welcome to Flyght</h1>
 
-        <img src="images/logo.png" alt="Logo description" width="200" height="50" class="right-aligned-logo">
+        <img src="logoo.jpeg" alt="Logo description" width="200" height="50" class="right-aligned-logo">
 
     </div>
 
@@ -180,24 +183,24 @@ $con->close();
     </div>
     <!-- Your existing JavaScript code -->
     <script>
-        // Get the button element by its ID
-        var signupBtn = document.getElementById('signupBtn');
+    // Get the button element by its ID
+    var signupBtn = document.getElementById('signupBtn');
 
-        // Add a click event listener to the button
-        signupBtn.addEventListener('click', function () {
-            // Redirect to register.php
-            window.location.href = 'register.php';
-        });
+    // Add a click event listener to the button
+    signupBtn.addEventListener('click', function() {
+        // Redirect to register.php
+        window.location.href = 'register.php';
+    });
 
-        // Check if there's a query parameter indicating invalid credentials
-        var urlParams = new URLSearchParams(window.location.search);
-        var invalidCredentials = urlParams.get('invalidCredentials');
+    // Check if there's a query parameter indicating invalid credentials
+    var urlParams = new URLSearchParams(window.location.search);
+    var invalidCredentials = urlParams.get('invalidCredentials');
 
-        // Display the message if invalid credentials
-        if (invalidCredentials) {
-            var invalidCredentialsMsg = document.getElementById('invalidCredentialsMsg');
-            invalidCredentialsMsg.style.display = 'block';
-        }
+    // Display the message if invalid credentials
+    if (invalidCredentials) {
+        var invalidCredentialsMsg = document.getElementById('invalidCredentialsMsg');
+        invalidCredentialsMsg.style.display = 'block';
+    }
     </script>
 </body>
 
